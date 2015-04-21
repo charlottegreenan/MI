@@ -37,7 +37,7 @@
 
 	mydata <- sienaDataCreate(friendship, smokeBeh, drinkCov)
 	myeff <- getEffects(mydata)
-	myModel <- sienaModelCreate(useStdInits=FALSE, projname='mi_example')
+	myModel <- sienaModelCreate(useStdInits=FALSE, projname='mi_example', dolby = FALSE)
 
 	myeff[myeff$effectName=='transitive triplets' &
  		myeff$type=='eval', 'include'] <- TRUE

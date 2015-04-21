@@ -39,6 +39,11 @@ maxWaveToImpute = NULL, uponly = NULL, downonly = NULL)
 
     maxBeh <- max(beh, na.rm=TRUE)
     minBeh <- min(beh, na.rm=TRUE)
+	
+	if (maxBeh > 1)
+	{
+		stop("Not yet implemented for non-binary behavior data.")
+	}
 
     ## Imputing by wave ##
     for (m in 1:noImp)
@@ -105,23 +110,11 @@ maxWaveToImpute = NULL, uponly = NULL, downonly = NULL)
 
             at.risk <- at.risk&!is.na(behImp[,w])
 
-
-            if (maxBeh == 1)
-            {
                 bayes1 <- bayesglm(behImp[at.risk,w] ~ targets[at.risk,],
                 family = binomial(link = 'cloglog'))
                 post1 <- sim(bayes1, 1)@coef
                 targets <- cbind(1, targets)
                 p <- 1 - exp(-exp(targets%*%t(post1)))
-
-            } else {
-
-                bayes1 <- bayesglm(behImp[at.risk,w] ~ targets[at.risk,],
-                family = 'quasipoisson')
-                post1 <- sim(bayes1, 1)@coef
-                targets <- cbind(1, targets)
-                p <- 1/(1+exp(-targets%*%t(post1)))
-            }
 
             behImp[is.na(behImp[,w]),w] <- rbinom(sum(is.na(behImp[,w])),maxBeh,
             p[is.na(behImp[,w])])
