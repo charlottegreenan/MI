@@ -155,8 +155,8 @@ for (i in 1:n.imp)
     beh.data <- imputed_data[i,,]
     imputed.behaviour <- sienaNet(beh.data, type="behavior")
     assign(behaviorName, imputed.behaviour)
-    data.objects <- c(names(mydata[[3]]),names(mydata[[4]]),names(mydata[[5]]),
-    names(mydata[[6]]),names(mydata[[7]]),names(mydata[[8]]))
+    data.objects <- c(names(data[[3]]),names(data[[4]]),names(data[[5]]),
+    names(data[[6]]),names(data[[7]]),names(data[[8]]))
     data.arguments.list <- vector("list", length(data.objects))
     names(data.arguments.list) <- data.objects
 
@@ -224,8 +224,8 @@ for (i in c(1:n.imp))
 	assign(behaviorName, imputed.behaviour)
 
 	## recreate the data object
-	data.objects <- c(names(mydata[[3]]),names(mydata[[4]]),names(mydata[[5]]),
-				names(mydata[[6]]),names(mydata[[7]]),names(mydata[[8]]))
+	data.objects <- c(names(data[[3]]),names(data[[4]]),names(data[[5]]),
+				names(data[[6]]),names(data[[7]]),names(data[[8]]))
 	data.arguments.list <- vector("list", length(data.objects))
 	names(data.arguments.list) <- data.objects
 
